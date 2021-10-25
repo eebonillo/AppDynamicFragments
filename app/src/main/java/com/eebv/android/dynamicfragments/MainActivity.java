@@ -22,13 +22,6 @@ public class MainActivity extends AppCompatActivity implements CountriesRecycler
 
         fragmentManager = getSupportFragmentManager();
 
-        if(findViewById(R.id.fragmentContainerViewDetail) == null){
-            addCountriesFragment();
-        }else {
-            addCountriesFragment();
-            addCountryDescriptionFragment(R.id.fragmentContainerViewDetail, null);
-        }
-
     }
 
     private void addCountriesFragment(){
@@ -62,5 +55,12 @@ public class MainActivity extends AppCompatActivity implements CountriesRecycler
         }else {
             addCountryDescriptionFragment(R.id.fragmentContainerViewDetail,item);
         }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        fragmentManager.saveFragmentInstanceState(FragmentManager.findFragment(findViewById(R.id.fragmentContainerView)));
+        fragmentManager.saveFragmentInstanceState(FragmentManager.findFragment(findViewById(R.id.fragmentContainerViewDetail)));
     }
 }
