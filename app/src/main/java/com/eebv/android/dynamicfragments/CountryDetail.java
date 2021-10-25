@@ -34,6 +34,10 @@ public class CountryDetail extends Fragment {
     // TODO: Rename and change types of parameters
     private PlaceholderContent.PlaceholderItem mCountry;
 
+    public void setmCountry(PlaceholderContent.PlaceholderItem mCountry) {
+        this.mCountry = mCountry;
+    }
+
     public CountryDetail() {
         // Required empty public constructor
     }
