@@ -23,18 +23,10 @@ public class MainActivity extends AppCompatActivity implements CountriesRecycler
         fragmentManager = getSupportFragmentManager();
 
         if(findViewById(R.id.fragmentContainerViewDetail) == null){
-            if(savedInstanceState==null){
-                addCountriesFragment();
-            }else{
-                addCountryDescriptionFragment(R.id.fragmentContainerView, savedInstanceState.getParcelable(CountryDetail.ITEM));
-            }
+            addCountriesFragment();
         }else {
             addCountriesFragment();
-            if(savedInstanceState==null){
-                addCountryDescriptionFragment(R.id.fragmentContainerViewDetail, null);
-            }else{
-                addCountryDescriptionFragment(R.id.fragmentContainerViewDetail,savedInstanceState.getParcelable(CountryDetail.ITEM));
-            }
+            addCountryDescriptionFragment(R.id.fragmentContainerViewDetail, null);
         }
 
     }
