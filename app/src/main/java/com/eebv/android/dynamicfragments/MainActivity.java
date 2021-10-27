@@ -59,13 +59,6 @@ public class MainActivity extends AppCompatActivity implements CountriesRecycler
         outState.putParcelable(CountryDetail.ITEM, country);
     }
 
-    /*
-    @Override
-    protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
-        super.onRestoreInstanceState(savedInstanceState);
-        updateFragmentContent(savedInstanceState);
-    }*/
-
     private void updateFragmentContent(Bundle savedInstanceState) {
         if(savedInstanceState != null) {
             this.country = savedInstanceState.getParcelable(CountryDetail.ITEM);
