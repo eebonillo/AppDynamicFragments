@@ -24,7 +24,6 @@ public class PlaceholderContent {
      * An array of sample (placeholder) items.
      */
     public final List<PlaceholderItem> ITEMS = new ArrayList<PlaceholderItem>();
-    public static PlaceholderItem DEFAULT;
 
 
     /*public PlaceholderContent(List<String[]> countries) {
@@ -45,7 +44,6 @@ public class PlaceholderContent {
     private static PlaceholderItem getItem(Resources resources, String packageName, String country, int id) {
         String [] countryDetail = resources.getStringArray(resources.getIdentifier(country, "array", packageName));
         PlaceholderItem item = new PlaceholderItem(id+"", countryDetail[0], countryDetail[1], countryDetail[2]);
-        DEFAULT = item;
         return item;
     }
 
