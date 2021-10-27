@@ -76,16 +76,16 @@ public class MainActivity extends AppCompatActivity implements CountriesRecycler
             this.country = savedInstanceState.getParcelable(CountryDetail.ITEM);
             if (country != null) {
                 Fragment currentInContainerView = fragmentManager.findFragmentById(R.id.fragmentContainerView);
+                fragmentManager.popBackStackImmediate("list", FragmentManager.POP_BACK_STACK_INCLUSIVE);
                 if (findViewById(R.id.fragmentContainerView) != null ) {
-                    fragmentManager.popBackStackImmediate("list", FragmentManager.POP_BACK_STACK_INCLUSIVE);
                     replaceCountryDescriptionFragment(R.id.fragmentContainerView, country);
                 } else {
                     CountryDetail currentDetail = (CountryDetail) fragmentManager.findFragmentById(R.id.fragmentContainerViewDetail);
                     currentDetail.setmCountry(country);
                 }
             }
-        }
-        customizeActionBar();
+        } else
+            customizeActionBar();
     }
 
     public void setCountry(PlaceholderContent.PlaceholderItem country) {
