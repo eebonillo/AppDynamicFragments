@@ -25,13 +25,6 @@ public class MainActivity extends AppCompatActivity implements CountriesRecycler
         Log.i("pruebas", "onCreate: " + fragmentManager);
     }
 
-    private void replaceCountriesFragment(){
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        CountriesFragment countryListFragment=CountriesFragment.newInstance();
-        fragmentTransaction.replace(R.id.fragmentContainerView,countryListFragment);
-        fragmentTransaction.commit();
-    }
-
     private void replaceCountryDescriptionFragment(int fragmentContainerId, PlaceholderContent.PlaceholderItem item){
         FragmentTransaction fragmentTransaction=fragmentManager.beginTransaction();
 
