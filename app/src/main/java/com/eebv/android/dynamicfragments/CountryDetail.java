@@ -78,7 +78,10 @@ public class CountryDetail extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_country_detail, container, false);
 
-        this.customizeActionBar();
+        MainActivity activity = (MainActivity) this.getActivity();
+        activity.setCountry(mCountry);
+
+        activity.customizeActionBar();
 
         ImageView iv = view.findViewById(R.id.countryPicture);
         iv.setImageResource(getImageId(mCountry.picture));
@@ -87,13 +90,6 @@ public class CountryDetail extends Fragment {
         tv.setText(mCountry.details);
 
         return view;
-    }
-
-    private void customizeActionBar() {
-        final ActionBar supportActionBar = ((AppCompatActivity) getActivity()).getSupportActionBar();
-        supportActionBar.setTitle(mCountry.country);
-        supportActionBar.setDisplayHomeAsUpEnabled(true);
-        //supportActionBar.setDisplayShowHomeEnabled(true);
     }
 
     private int getImageId(String imagePath) {

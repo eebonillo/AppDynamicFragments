@@ -1,6 +1,8 @@
 package com.eebv.android.dynamicfragments;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -31,15 +33,27 @@ public class MainActivity extends AppCompatActivity implements CountriesRecycler
         CountryDetail countryDescriptionFragment=CountryDetail.newInstance(item);
 
         fragmentTransaction.replace(fragmentContainerId,countryDescriptionFragment);
-        fragmentTransaction.addToBackStack(null);
+        fragmentTransaction.addToBackStack(item == null ? "detail" : "list");
         fragmentTransaction.commit();
     }
-
 
     @Override
     public boolean onSupportNavigateUp() {
         getSupportFragmentManager().popBackStackImmediate();
+        customizeActionBar();
         return super.onSupportNavigateUp();
+    }
+
+    public void customizeActionBar() {
+        final ActionBar supportActionBar = getSupportActionBar();
+
+        int popBackStackEntryCount = getSupportFragmentManager().getBackStackEntryCount();
+        if(findViewById(R.id.fragmentContainerView) != null && popBackStackEntryCount == 0) {
+            supportActionBar.setTitle(R.string.select_country);
+        } else if(country != null){
+            supportActionBar.setTitle(country.country);
+        }
+        supportActionBar.setDisplayHomeAsUpEnabled(popBackStackEntryCount != 0);
     }
 
     @Override
@@ -49,9 +63,7 @@ public class MainActivity extends AppCompatActivity implements CountriesRecycler
         }else {
             replaceCountryDescriptionFragment(R.id.fragmentContainerViewDetail,item);
         }
-        if(item != null) {
-            this.country = item;
-        }
+        //country = item;
     }
 
     protected void onSaveInstanceState(@NonNull Bundle outState) {
@@ -65,15 +77,18 @@ public class MainActivity extends AppCompatActivity implements CountriesRecycler
             if (country != null) {
                 Fragment currentInContainerView = fragmentManager.findFragmentById(R.id.fragmentContainerView);
                 if (findViewById(R.id.fragmentContainerView) != null ) {
-                    if(currentInContainerView != null && currentInContainerView instanceof CountryDetail)
-                        ((CountryDetail) currentInContainerView).setmCountry(country);
-                    else
-                        replaceCountryDescriptionFragment(R.id.fragmentContainerView, country);
+                    fragmentManager.popBackStackImmediate("list", FragmentManager.POP_BACK_STACK_INCLUSIVE);
+                    replaceCountryDescriptionFragment(R.id.fragmentContainerView, country);
                 } else {
                     CountryDetail currentDetail = (CountryDetail) fragmentManager.findFragmentById(R.id.fragmentContainerViewDetail);
                     currentDetail.setmCountry(country);
                 }
             }
         }
+        customizeActionBar();
+    }
+
+    public void setCountry(PlaceholderContent.PlaceholderItem country) {
+        this.country = country;
     }
 }

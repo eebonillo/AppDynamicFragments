@@ -46,17 +46,10 @@ public class CountriesFragment extends Fragment {
         super.onCreate(savedInstanceState);
     }
 
-    private void customizeActionBar() {
-        final ActionBar supportActionBar = ((AppCompatActivity) getActivity()).getSupportActionBar();
-        supportActionBar.setTitle(R.string.select_country);
-        supportActionBar.setDisplayHomeAsUpEnabled(false);
-    }
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_countries_list, container, false);
-        customizeActionBar();
 
         // Set the adapter
         if (view instanceof RecyclerView) {
